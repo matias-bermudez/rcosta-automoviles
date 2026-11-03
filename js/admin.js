@@ -380,14 +380,14 @@ fNegocio.addEventListener('submit', async (e) => {
   error($('#neg-error'));
   const el = fNegocio.elements;
   const tel = telefonoUY(el.whatsapp.value);
-  if (!tel) return error($('#neg-error'), 'El WhatsApp tiene que ser un número de Uruguay, por ejemplo 097 945 961.');
+  if (!tel) return error($('#neg-error'), 'El WhatsApp tiene que ser un número de Uruguay, por ejemplo 099 123 456.');
   const extra = Object.assign({}, negocio && negocio.extra);
   for (const k of EXTRA_NEGOCIO) extra[k] = el[k].value.trim();
   // Los teléfonos se guardan con el mismo formato que el WhatsApp.
   for (const k of ['telLlamadas', 'telOtro']) {
     if (!extra[k]) continue;
     const t = telefonoUY(extra[k]);
-    if (!t) return error($('#neg-error'), 'Revisá el teléfono: tiene que ser un número de Uruguay, por ejemplo 2682 0000 o 097 945 961.');
+    if (!t) return error($('#neg-error'), 'Revisá el teléfono: tiene que ser un número de Uruguay, por ejemplo 2682 0000 o 099 123 456.');
     extra[k] = t.telefono;
   }
   if (extra.mapa && !/^https?:\/\//.test(extra.mapa)) return error($('#neg-error'), 'El enlace de Google Maps tiene que empezar con https://');
