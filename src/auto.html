@@ -1,0 +1,75 @@
+{{> head}}
+<body class="rc" data-raiz="{{raiz}}">
+{{> header}}
+
+<main id="contenido" class="wrap">
+<nav class="crumbs" aria-label="Ruta"><a href="{{raiz}}autos/">Catálogo</a><span aria-hidden="true">/</span>{{a.migaTipo}}<span aria-current="page">{{a.nombre}}</span></nav>
+
+<div class="ficha">
+<section aria-label="Fotos del auto">
+<div class="gal-bleed">
+<div class="gal-main" id="foto" data-auto="{{a.id}}">
+{{galeria.principal}}
+{{galeria.tag}}
+<button class="gal-nav prev" type="button" aria-label="Foto anterior" id="ant"{{galeria.ocultas}}>←</button>
+<button class="gal-nav next" type="button" aria-label="Foto siguiente" id="sig"{{galeria.ocultas}}>→</button>
+<span class="gal-count" id="contador"{{galeria.ocultas}}>1 / {{galeria.total}}</span>
+</div>
+</div>
+<div class="thumbs" role="list" id="thumbs"{{galeria.ocultas}}>
+{{galeria.thumbs}}
+</div>
+</section>
+
+<aside class="buybox stack g24" aria-labelledby="car-t">
+<div class="stack g8">
+<p class="eyebrow">{{a.eyebrow}}</p>
+<h1 id="car-t" class="h1">{{a.modelo}}<span class="sr-only"> · {{a.marca}} {{a.anioSr}}</span></h1>
+{{a.version}}
+</div>
+<p class="mono" style="font-size: 14px; border-top: 1px solid #DAD8D3; border-bottom: 1px solid #DAD8D3; padding: 14px 0">{{a.datos}}</p>
+<div class="stack g8">
+<p class="eyebrow">Precio</p>
+<p class="price-xl">{{a.precio}}</p>
+{{a.notaPrecio}}
+</div>
+{{a.reservado}}
+<div class="stack g12">
+<a class="btn btn-block" href="{{consulta}}" style="min-height: 60px; font-size: 14px">{{a.cta}}</a>
+<a class="btn btn-line btn-block" href="{{raiz}}vende-tu-auto/?modo=permutar&amp;auto={{a.id}}#form">Entregar mi auto como parte de pago</a>
+</div>
+<div class="stack g8">
+<p class="eyebrow">Se abre WhatsApp con este mensaje</p>
+<p class="msg">{{mensaje}}</p>
+</div>
+</aside>
+</div>
+
+<section class="sec" style="padding-bottom: 0" aria-labelledby="spec-t">
+<div class="split" style="gap: 64px">
+<div class="stack g24">
+<h2 id="spec-t" class="h3">Ficha técnica</h2>
+<dl class="spec">
+{{ficha}}
+</dl>
+</div>
+{{vendedor}}
+</div>
+</section>
+
+{{equipamiento}}
+
+<section class="sec" aria-labelledby="sim-t">
+<div class="sec-head">
+<div class="stack g12"><p class="eyebrow">En la misma sala</p><h2 id="sim-t" class="h2">{{tituloParecidos}}</h2></div>
+<a class="link" href="{{raiz}}autos/">Volver al catálogo</a>
+</div>
+{{parecidos}}
+</section>
+</main>
+
+{{> footer}}
+
+<div class="m-bar"><a class="btn" href="{{consulta}}"><span class="wa-dot" aria-hidden="true"></span>{{a.cta}}</a></div>
+</body>
+</html>
