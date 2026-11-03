@@ -1,0 +1,211 @@
+{{> head}}
+<body class="pn" data-raiz="{{raiz}}">
+
+<p class="pn-aviso" id="cargando">Cargando…</p>
+
+<!-- Ingreso -->
+<div class="login" id="v-login" hidden>
+<div class="login-art">
+<div class="pn-brand"><img src="{{raiz}}img/logo.png" alt="">R.COSTA<small>Panel</small></div>
+<div class="stack g24">
+<img src="{{raiz}}img/linea-clara.svg" alt="" style="width: 360px; opacity: .9">
+<p style="font: 500 44px/1.05 var(--serif); margin: 0; max-width: 14ch">Tu sala, <span class="it">desde el celular.</span></p>
+</div>
+<p class="eyebrow" style="color: var(--fog)">| Compra | Venta | Permuta | Consignación |</p>
+</div>
+<div class="login-form">
+<form class="stack g24" style="width: 100%; max-width: 380px" id="f-login">
+<div class="stack g16" style="align-items: flex-start">
+<img src="{{raiz}}img/logo.png" alt="R.Costa Automóviles" style="width: 72px; height: 72px; border-radius: 50%">
+<h1 class="pn-h">Ingresar al panel</h1>
+<p class="hint" style="font-size: 15px">Solo para el equipo de R.Costa.</p>
+</div>
+<div class="field"><label for="u">Correo</label><input id="u" name="email" class="input" type="email" autocomplete="username" inputmode="email" required></div>
+<div class="field"><label for="p">Contraseña</label><input id="p" name="password" class="input" type="password" autocomplete="current-password" required></div>
+<label class="sw-row" style="min-height: 44px; font-size: 15px" for="rem">Mantener la sesión abierta en este celular<input id="rem" class="sw" type="checkbox" checked></label>
+<button class="btn btn-block" type="submit" style="min-height: 56px" id="entrar">Entrar</button>
+<p class="pn-error" id="login-error" role="alert" hidden></p>
+{{soporte}}
+</form>
+</div>
+</div>
+
+<!-- Panel -->
+<div id="app" hidden>
+<header class="pn-top"><div class="in">
+<a class="pn-brand" href="#" data-ir="lista"><img src="{{raiz}}img/logo.png" alt="">R.COSTA<small>Panel</small></a>
+<div class="row" style="gap: 20px"><a href="{{raiz}}" target="_blank" rel="noopener" data-fresco style="font-size: 14px">Ver la web</a><button type="button" id="salir">Salir</button></div>
+</div></header>
+
+<div class="pn-shell">
+<nav class="pn-side" aria-label="Panel">
+<a href="#" data-ir="lista" aria-current="page">Tus autos</a>
+<a href="#" data-ir="nuevo">Cargar un auto</a>
+<a href="#" data-ir="negocio">Datos del negocio</a>
+</nav>
+
+<!-- Tus autos -->
+<main class="pn-main" id="v-lista" hidden>
+<div class="row" style="justify-content: space-between; gap: 16px">
+<div class="stack g4"><p class="eyebrow" id="resumen"></p><h1 class="pn-h">Tus autos</h1></div>
+<button class="btn d-only" type="button" data-ir="nuevo">+ Cargar auto</button>
+</div>
+<div class="field"><label for="buscar">Buscar</label><input id="buscar" class="input" type="search" placeholder="Marca o modelo" autocomplete="off"></div>
+<div class="tabs" role="group" aria-label="Filtrar por estado" id="tabs"></div>
+<div class="card" id="lista"></div>
+<p class="hint">Los vendidos dejan de verse en la web, pero quedan guardados acá. Lo que guardes se publica solo en unos minutos.</p>
+</main>
+
+<!-- Editar auto -->
+<main class="pn-main" id="v-editor" hidden>
+<form class="stack g24" id="f-auto" novalidate>
+<div class="stack g8">
+<a href="#" data-ir="lista" style="font-size: 14px; display: inline-flex; align-items: center; min-height: 44px; align-self: flex-start">← Tus autos</a>
+<h1 class="pn-h" id="ed-titulo">Cargar un auto</h1>
+<p class="car-meta" id="ed-meta" hidden></p>
+</div>
+
+<section class="card card-pad stack g16" aria-labelledby="fotos-h">
+<div class="row" style="justify-content: space-between"><h2 id="fotos-h" class="card-h" style="margin: 0">Fotos</h2><span class="car-meta" id="n-fotos">0 fotos · la primera es la portada</span></div>
+<div class="ph-add una">
+<label class="primary camara" for="cam">Sacar foto<input id="cam" type="file" accept="image/*" capture="environment"></label>
+<label for="gal">Elegir de la galería<input id="gal" type="file" accept="image/*" multiple></label>
+</div>
+<p class="hint">Consejo: de frente en tres cuartos, con el árbol de fondo, como en Instagram. Horizontales: se recortan solas en 4:3.</p>
+<p class="subiendo" id="subiendo" role="status" hidden></p>
+<div class="ph-grid" id="fotos"></div>
+</section>
+
+<section class="card card-pad" aria-labelledby="datos-h">
+<h2 id="datos-h" class="card-h">Datos</h2>
+<div class="form-grid">
+<div class="field"><label for="e-marca">Marca</label><input id="e-marca" name="marca" class="input" type="text" autocomplete="off" placeholder="Ej.: Ford" required></div>
+<div class="field"><label for="e-modelo">Modelo</label><input id="e-modelo" name="modelo" class="input" type="text" autocomplete="off" placeholder="Ej.: Ranger Raptor" required></div>
+<div class="field span2"><label for="e-version">Versión</label><input id="e-version" name="version" class="input" type="text" autocomplete="off" placeholder="Ej.: 3.0 V6 biturbo 4x4 (opcional)"></div>
+<div class="field"><label for="e-anio">Año</label><input id="e-anio" name="anio" class="input" type="text" inputmode="numeric" autocomplete="off" placeholder="Vacío = a consultar"></div>
+<div class="field"><label for="e-km">Kilómetros</label><input id="e-km" name="km" class="input" type="text" inputmode="numeric" autocomplete="off" placeholder="Vacío = a consultar"></div>
+<div class="field"><label for="e-carroceria">Tipo</label><select id="e-carroceria" name="carroceria" class="input"></select></div>
+<div class="field"><label for="e-comb">Combustible</label><select id="e-comb" name="combustible" class="input"><option>Nafta</option><option>Diésel</option><option>Híbrido</option><option>Eléctrico</option></select></div>
+<fieldset class="fgroup span2"><legend>Caja</legend><div class="seg" data-grupo="transmision">
+<button class="chip" type="button" data-v="Automática" aria-pressed="false" style="flex: 1; justify-content: center; min-height: 52px">Automática</button>
+<button class="chip" type="button" data-v="Manual" aria-pressed="true" style="flex: 1; justify-content: center; min-height: 52px">Manual</button>
+</div></fieldset>
+<div class="field"><label for="e-precio">Precio</label><input id="e-precio" name="precio" class="input" type="text" inputmode="numeric" autocomplete="off" placeholder="Vacío = consultar" style="font-family: var(--mono)"></div>
+<fieldset class="fgroup"><legend>Moneda</legend><div class="seg" data-grupo="moneda">
+<button class="chip" type="button" data-v="USD" aria-pressed="true" style="flex: 1; justify-content: center; min-height: 52px">U$S</button>
+<button class="chip" type="button" data-v="UYU" aria-pressed="false" style="flex: 1; justify-content: center; min-height: 52px">$</button>
+</div></fieldset>
+</div>
+</section>
+
+<section class="card card-pad" aria-labelledby="ficha-h">
+<h2 id="ficha-h" class="card-h">Ficha técnica <span class="hint" style="text-transform: none; letter-spacing: 0; font-weight: 400">(opcional: lo vacío no se muestra)</span></h2>
+<div class="form-grid">
+<div class="field"><label for="e-motor">Motor</label><input id="e-motor" name="motor" class="input" type="text" autocomplete="off" placeholder="Ej.: 3.0 V6 biturbo"></div>
+<div class="field"><label for="e-traccion">Tracción</label><input id="e-traccion" name="traccion" class="input" type="text" autocomplete="off" placeholder="Ej.: 4x4"></div>
+<div class="field"><label for="e-marchas">Marchas</label><input id="e-marchas" name="marchas" class="input" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 10"></div>
+<div class="field"><label for="e-color">Color</label><input id="e-color" name="color" class="input" type="text" autocomplete="off" placeholder="Ej.: Gris oscuro"></div>
+<div class="field"><label for="e-puertas">Puertas</label><input id="e-puertas" name="puertas" class="input" type="text" inputmode="numeric" autocomplete="off"></div>
+<div class="field"><label for="e-duenos">Dueños</label><input id="e-duenos" name="duenos" class="input" type="text" inputmode="numeric" autocomplete="off"></div>
+<div class="field"><label for="e-service">Service</label><input id="e-service" name="service" class="input" type="text" autocomplete="off" placeholder="Ej.: Oficial al día"></div>
+<div class="field"><label for="e-ubicacion">Dónde se ve</label><input id="e-ubicacion" name="ubicacion" class="input" type="text" autocomplete="off" placeholder="Si no está en el local. Ej.: Solymar"></div>
+<div class="field span2" id="campo-sede" hidden><label for="e-sede">Local</label><select id="e-sede" name="sede" class="input"></select></div>
+</div>
+</section>
+
+<section class="card card-pad stack g16" aria-labelledby="pub-h">
+<h2 id="pub-h" class="card-h" style="margin: 0">Publicación</h2>
+<fieldset class="fgroup"><legend>Estado</legend><div class="seg" data-grupo="estado">
+<button class="chip" type="button" data-v="disponible" aria-pressed="true" style="flex: 1; justify-content: center; min-height: 52px">Disponible</button>
+<button class="chip" type="button" data-v="reservado" aria-pressed="false" style="flex: 1; justify-content: center; min-height: 52px">Reservado</button>
+<button class="chip" type="button" data-v="vendido" aria-pressed="false" style="flex: 1; justify-content: center; min-height: 52px">Vendido</button>
+</div></fieldset>
+<label class="sw-row" for="e-dest" style="border-top: 1px solid #DAD8D3; padding-top: 8px"><span class="stack"><span style="font-weight: 600">Destacado en el inicio</span><span class="hint">Aparece en “En exhibición ahora”.</span></span><input id="e-dest" name="destacado" class="sw" type="checkbox"></label>
+<label class="sw-row" for="e-pub" style="border-top: 1px solid #DAD8D3; padding-top: 8px"><span class="stack"><span style="font-weight: 600">Se ve en la web</span><span class="hint">Apagado = borrador, solo lo ves vos.</span></span><input id="e-pub" name="publicado" class="sw" type="checkbox" checked></label>
+<label class="sw-row" for="e-permuta" style="border-top: 1px solid #DAD8D3; padding-top: 8px"><span style="font-weight: 600">Acepta permuta</span><input id="e-permuta" name="acepta_permuta" class="sw" type="checkbox" checked></label>
+<label class="sw-row" for="e-fin" style="border-top: 1px solid #DAD8D3; padding-top: 8px"><span style="font-weight: 600">Se puede financiar</span><input id="e-fin" name="financiable" class="sw" type="checkbox"></label>
+</section>
+
+<section class="card card-pad stack g16" aria-labelledby="eq-h">
+<h2 id="eq-h" class="card-h" style="margin: 0">Equipamiento</h2>
+<div class="row" style="gap: 8px" id="equip"></div>
+<div class="row" style="flex-wrap: nowrap; gap: 8px">
+<label class="sr-only" for="e-eq">Agregar equipamiento</label>
+<input id="e-eq" class="input" type="text" placeholder="Ej.: Techo solar" autocomplete="off">
+<button class="btn" type="button" id="agregar-eq" style="flex: none">Agregar</button>
+</div>
+</section>
+
+<section class="card card-pad stack g12" aria-labelledby="desc-h">
+<h2 id="desc-h" class="card-h" style="margin: 0"><label for="e-desc">Descripción del vendedor</label></h2>
+<textarea id="e-desc" name="descripcion" class="input" placeholder="Ej.: Único dueño, siempre en garaje, services en la casa oficial."></textarea>
+<p class="hint">Corto y concreto: estado, historial y lo que lo hace distinto.</p>
+</section>
+
+<section class="card card-pad stack g12" id="borrar-box" hidden>
+<h2 class="card-h" style="margin: 0">Borrar</h2>
+<p class="hint">Si se vendió, mejor marcalo como Vendido: deja de verse en la web y queda guardado acá.</p>
+<button class="btn btn-line pn-danger" type="button" id="borrar" style="align-self: flex-start">Borrar este auto</button>
+</section>
+
+<p class="pn-error" id="ed-error" role="alert" hidden></p>
+<div class="savebar">
+<a class="btn btn-line" id="ed-ver" href="#" target="_blank" rel="noopener" data-fresco hidden>Ver en la web</a>
+<button class="btn btn-line" type="button" id="cancelar">Cancelar</button>
+<button class="btn" type="submit" id="guardar">Guardar</button>
+</div>
+</form>
+</main>
+
+<!-- Datos del negocio -->
+<main class="pn-main" id="v-negocio" hidden>
+<form class="stack g24" id="f-negocio" novalidate>
+<div class="stack g4"><p class="eyebrow">Se usan en toda la web</p><h1 class="pn-h">Datos del negocio</h1></div>
+<section class="card card-pad" aria-labelledby="wa-h">
+<h2 id="wa-h" class="card-h">WhatsApp y teléfonos</h2>
+<div class="form-grid">
+<div class="field span2"><label for="n-wa">WhatsApp (recibe todos los mensajes de la web)</label><input id="n-wa" name="whatsapp" class="input" type="tel" inputmode="tel" autocomplete="off" placeholder="Ej.: 097 945 961" style="font-family: var(--mono)" required></div>
+<div class="field"><label for="n-t1">Teléfono para llamadas</label><input id="n-t1" name="telLlamadas" class="input" type="tel" inputmode="tel" autocomplete="off" placeholder="Vacío = el mismo del WhatsApp" style="font-family: var(--mono)"></div>
+<div class="field"><label for="n-t2">Otro teléfono (opcional)</label><input id="n-t2" name="telOtro" class="input" type="tel" inputmode="tel" autocomplete="off" placeholder="Ej.: 2682 0000" style="font-family: var(--mono)"></div>
+</div>
+</section>
+<section class="card card-pad stack g16" aria-labelledby="dir-h">
+<h2 id="dir-h" class="card-h" style="margin: 0">Dirección</h2>
+<div class="form-grid">
+<div class="field span2"><label for="n-dir">Calle y número</label><input id="n-dir" name="direccion" class="input" type="text" autocomplete="off" placeholder="Vacío = no se muestra"></div>
+<div class="field"><label for="n-loc">Localidad</label><input id="n-loc" name="localidad" class="input" type="text" autocomplete="off"></div>
+<div class="field"><label for="n-dep">Departamento</label><input id="n-dep" name="departamento" class="input" type="text" autocomplete="off"></div>
+<div class="field span2"><label for="n-map">Enlace de Google Maps</label><input id="n-map" name="mapa" class="input" type="url" autocomplete="off" placeholder="https://maps.app.goo.gl/…"></div>
+</div>
+<div class="stack g12" id="sedes"></div>
+<button class="btn btn-line" type="button" id="agregar-sede" style="align-self: flex-start">+ Agregar otro local</button>
+</section>
+<section class="card card-pad" aria-labelledby="hor-h">
+<h2 id="hor-h" class="card-h">Horarios</h2>
+<div class="stack" id="dias"></div>
+</section>
+<section class="card card-pad" aria-labelledby="red-h">
+<h2 id="red-h" class="card-h">Redes</h2>
+<div class="form-grid">
+<div class="field"><label for="n-ig">Instagram</label><input id="n-ig" name="instagram" class="input" type="text" autocomplete="off" placeholder="@usuario"></div>
+<div class="field"><label for="n-fb">Facebook</label><input id="n-fb" name="facebook" class="input" type="text" autocomplete="off" placeholder="Usuario o enlace"></div>
+<div class="field"><label for="n-tt">TikTok</label><input id="n-tt" name="tiktok" class="input" type="text" autocomplete="off" placeholder="@usuario"></div>
+<div class="field"><label for="n-ml">Mercado Libre</label><input id="n-ml" name="mercadolibre" class="input" type="text" autocomplete="off" placeholder="Enlace a la tienda"></div>
+</div>
+</section>
+<p class="pn-error" id="neg-error" role="alert" hidden></p>
+<div class="savebar"><button class="btn btn-line" type="button" data-ir="lista">Cancelar</button><button class="btn" type="submit" id="guardar-negocio">Guardar cambios</button></div>
+</form>
+</main>
+</div>
+
+<div class="m-only pn-pie" id="m-lista" hidden>
+<div style="padding: 12px 16px; background: rgba(242,241,238,.96)"><button class="btn btn-block" type="button" data-ir="nuevo" style="min-height: 56px">+ Cargar auto</button></div>
+<nav class="pn-bottom" aria-label="Panel"><a href="#" data-ir="lista" aria-current="page">Autos</a><a href="#" data-ir="negocio">Negocio</a><a href="{{raiz}}" target="_blank" rel="noopener" data-fresco>Ver web</a></nav>
+</div>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<script type="module" src="{{raiz}}js/admin.js?v={{v.admin}}"></script>
+</body>
+</html>
