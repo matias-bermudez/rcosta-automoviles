@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<title>R.Costa Automóviles — Catálogo</title>
+<script src="assets/0a295884-7eb8-4cd6-b7f7-2b8714d85342.js"></script>
+<style>/* R.Costa Automóviles — "Galería". Blanco y negro, serif para títulos, mono para datos de exhibición. */
+:root{
+  --ink:#111111; --paper:#FFFFFF; --wall:#F2F1EE; --line:#DAD8D3; --edge:#8C8A84; --muted:#57554F;
+  --night:#0E0E0E; --night-line:#2E2E2C; --fog:#B9B6AF;
+  --serif:"Cormorant Garamond","Cormorant",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+.rc{font-family:var(--sans);color:var(--ink);background:var(--paper);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.rc a{color:inherit}
+.rc img{display:block;max-width:100%}
+.rc p{margin:0}
+.rc :focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.dark :focus-visible,.foot :focus-visible{outline-color:#fff}
+.wrap{width:100%;max-width:1320px;margin:0 auto;padding:0 48px}
+.narrow{max-width:880px}
+
+/* Cabezal: la bio de Instagram como franja */
+.strip{border-bottom:1px solid var(--line);font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.strip .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:36px}
+.strip span{white-space:nowrap}
+.head{border-bottom:1px solid var(--line);background:var(--paper)}
+.head .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:96px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand img{width:64px;height:64px;border-radius:50%}
+.brand-name{font:600 23px/1 var(--serif);letter-spacing:.03em}
+.brand-name small{display:block;font:500 10px/1 var(--mono);letter-spacing:.24em;color:var(--muted);margin-top:7px;text-transform:uppercase}
+.nav{display:flex;gap:36px}
+.nav a{font:500 15px/1 var(--sans);text-decoration:none;padding:14px 0;border-bottom:1px solid transparent}
+.nav a:hover,.nav a[aria-current="page"]{border-bottom-color:var(--ink)}
+
+/* Botones: rectos, sin radios, como un rótulo */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;background:var(--ink);color:#fff;border:1px solid var(--ink);font:600 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;text-decoration:none;cursor:pointer;border-radius:0;white-space:nowrap}
+.rc a.btn{color:#fff}
+.btn:hover{background:#333;border-color:#333}
+.btn-line,.rc a.btn-line{background:transparent;color:var(--ink)}
+.btn-line:hover,.rc a.btn-line:hover{background:var(--ink);color:#fff}
+.btn-light,.rc a.btn-light{background:#fff;color:var(--ink);border-color:#fff}
+.btn-light:hover,.rc a.btn-light:hover{background:var(--wall);border-color:var(--wall)}
+.btn-ghost-light,.rc a.btn-ghost-light{background:transparent;color:#fff;border-color:#fff}
+.btn-ghost-light:hover{background:#fff;color:var(--ink)}
+.btn-block{width:100%}
+.btn-sm{min-height:44px;padding:0 16px;font-size:12px}
+.link{font:500 15px/1.2 var(--sans);text-decoration:underline;text-underline-offset:5px;text-decoration-thickness:1px}
+.wa-dot{width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block}
+
+/* Tipografía */
+.eyebrow{font:500 12px/1.4 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:0}
+.dark .eyebrow,.foot .eyebrow{color:var(--fog)}
+.display{font:500 clamp(54px,7.4vw,112px)/.92 var(--serif);letter-spacing:-.015em;margin:0;text-wrap:balance}
+.h1{font:500 clamp(46px,5.4vw,84px)/.98 var(--serif);letter-spacing:-.01em;margin:0;text-wrap:balance}
+.h2{font:500 clamp(36px,3.8vw,56px)/1.02 var(--serif);margin:0;text-wrap:balance}
+.h3{font:600 28px/1.1 var(--serif);margin:0}
+.it{font-style:italic}
+.lead{font:400 19px/1.55 var(--sans);color:var(--muted);max-width:54ch;text-wrap:pretty}
+.dark .lead{color:var(--fog)}
+.body{font:400 16px/1.65 var(--sans);max-width:62ch;text-wrap:pretty}
+.mono{font-family:var(--mono)}
+.muted{color:var(--muted)}
+.dark .muted{color:var(--fog)}
+.tbd{font-family:var(--mono);font-size:.92em;background:var(--wall);padding:1px 6px;color:var(--ink)}
+.dark .tbd{background:#262624;color:#F2F1EE}
+
+/* Secciones */
+.sec{padding:120px 0}
+.sec-sm{padding:72px 0}
+.dark{background:var(--night);color:#F2F1EE}
+.wall{background:var(--wall)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px 32px;flex-wrap:wrap;padding-bottom:24px;border-bottom:1px solid var(--ink);margin-bottom:56px}
+.dark .sec-head{border-bottom-color:#F2F1EE}
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(460px,100%),1fr));gap:64px;align-items:start}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.stack{display:flex;flex-direction:column}
+.g4{gap:4px}.g8{gap:8px}.g12{gap:12px}.g16{gap:16px}.g24{gap:24px}.g32{gap:32px}.g48{gap:48px}.g64{gap:64px}
+
+/* Separador: la línea del auto del logo */
+.sep{display:flex;align-items:flex-end;gap:28px}
+.sep::before,.sep::after{content:"";flex:1;height:1px;background:var(--ink);margin-bottom:5px}
+.sep img{width:200px;height:auto}
+.dark .sep::before,.dark .sep::after{background:#F2F1EE}
+
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:72px;align-items:end;padding:88px 0 112px}
+.hero-photo{position:relative}
+.hero-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--wall)}
+.caption{display:flex;justify-content:space-between;gap:16px;padding-top:14px;border-top:1px solid var(--ink);margin-top:16px;font:500 12px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase}
+
+/* Lote: tarjeta de auto como pieza de exhibición */
+.lots{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:72px 32px}
+.lot{display:flex;flex-direction:column;text-decoration:none;color:inherit;position:relative}
+.lot-photo{position:relative;aspect-ratio:4/5;background:var(--wall);overflow:hidden}
+.lot-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.lot:hover .lot-photo img{transform:scale(1.03)}
+.lot-plaque{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;padding-top:16px}
+.lot-no{grid-column:1/-1;display:flex;justify-content:space-between;gap:12px;font:500 11px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--ink);margin-bottom:10px}
+.lot-title{font:600 30px/1.02 var(--serif);margin:0}
+.lot-price{font:500 18px/1.2 var(--mono);text-align:right;white-space:nowrap;padding-top:6px}
+.lot-ver{font-size:14px;color:var(--muted)}
+.lot-data{grid-column:1/-1;font:400 13px/1.5 var(--mono);margin-top:8px}
+.lot.res .lot-photo img{filter:grayscale(1);opacity:.55}
+.lot.res .lot-price{color:var(--muted)}
+.tag{position:absolute;top:16px;left:16px;background:var(--ink);color:#fff;font:500 11px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;padding:10px 12px}
+.dark .lot-no{border-bottom-color:#F2F1EE;color:var(--fog)}
+.dark .lot-ver{color:var(--fog)}
+
+/* Listas regladas (índice de catálogo, no tarjetas) */
+.ruled{list-style:none;margin:0;padding:0;border-top:1px solid currentColor}
+.ruled li{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:6px 40px;padding:22px 0;border-bottom:1px solid var(--line)}
+.dark .ruled li{border-bottom-color:var(--night-line)}
+.ruled .k{font:600 22px/1.2 var(--serif)}
+.ruled .v{color:var(--muted)}
+.dark .ruled .v{color:var(--fog)}
+
+/* Ficha técnica */
+.spec{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:32px;margin:0;border-top:1px solid var(--ink)}
+.spec div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.spec dt{font:500 11px/1.6 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.spec dd{margin:0;font:500 15px/1.4 var(--mono);text-align:right}
+.equip{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:32px}
+.equip ul{list-style:none;margin:12px 0 0;padding:0}
+.equip li{padding:9px 0;border-bottom:1px solid var(--line);font-size:15px}
+
+/* Galería de fotos de la ficha */
+.gal-main{position:relative;aspect-ratio:4/3;background:var(--wall);overflow:hidden}
+.gal-main img{width:100%;height:100%;object-fit:cover}
+.gal-count{position:absolute;right:16px;bottom:16px;background:rgba(17,17,17,.88);color:#fff;font:500 12px/1 var(--mono);letter-spacing:.1em;padding:9px 11px}
+.gal-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border:0;background:#fff;color:var(--ink);font:500 20px/1 var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.gal-nav.prev{left:16px}.gal-nav.next{right:16px}
+.thumbs{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px;margin-top:8px}
+.thumb{aspect-ratio:4/3;padding:0;border:1px solid transparent;background:var(--wall);cursor:pointer;overflow:hidden;position:relative}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb[aria-current="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+.ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--muted);font:500 11px/1.3 var(--mono);letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:8px}
+.ph img{width:46%;max-width:220px;opacity:.55}
+.ficha{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:64px;align-items:start}
+.buybox{border-top:1px solid var(--ink);padding-top:24px}
+.price-xl{font:500 40px/1 var(--mono);letter-spacing:-.01em}
+.msg{background:var(--wall);padding:16px 18px;font:400 14px/1.55 var(--mono);white-space:pre-line;border-left:0}
+.msg-wa{background:#fff;border:1px solid var(--line);padding:18px 20px;font:400 15px/1.6 var(--sans);white-space:pre-line}
+.crumbs{display:flex;flex-wrap:wrap;gap:10px;font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:28px 0}
+.crumbs a{text-decoration:none}
+.crumbs a:hover{text-decoration:underline}
+
+/* Filtros del catálogo */
+.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr)) minmax(0,.9fr);gap:24px;align-items:end;padding:24px 0 32px;border-bottom:1px solid var(--line)}
+.fgroup{display:flex;flex-direction:column;gap:10px;min-width:0;border:0;margin:0;padding:0}
+.fgroup legend{padding:0;margin-bottom:10px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:20px 0 40px}
+
+/* Formularios */
+.field{display:flex;flex-direction:column;gap:8px;min-width:0}
+.flabel,.field label,.fgroup legend{font:500 11px/1.3 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.input{min-height:52px;border:1px solid var(--edge);background:#fff;padding:0 14px;font:400 16px/1.2 var(--sans);color:var(--ink);border-radius:0;width:100%}
+textarea.input{min-height:150px;padding:14px;line-height:1.55;resize:vertical}
+.input:focus-visible{outline:2px solid var(--ink);outline-offset:0;border-color:var(--ink)}
+.input::placeholder{color:#76736D}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.span2{grid-column:1/-1}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 16px;border:1px solid var(--edge);background:#fff;font:500 14px/1 var(--sans);color:var(--ink);cursor:pointer;border-radius:0;display:inline-flex;align-items:center;gap:8px}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.hint{font-size:13px;color:var(--muted)}
+
+/* Mapa (marcador de posición) */
+.map{position:relative;min-height:440px;background-color:var(--wall);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;overflow:hidden;border:1px solid var(--line)}
+.road{position:absolute;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.road.a{left:-10%;right:-10%;top:58%;height:22px;transform:rotate(-8deg)}
+.road.b{top:-10%;bottom:-10%;left:38%;width:14px;transform:rotate(12deg)}
+.pin{position:absolute;left:46%;top:46%;display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-100%)}
+.pin img{width:56px;height:56px;border-radius:50%;box-shadow:0 0 0 4px #fff}
+.pin span{width:1px;height:28px;background:var(--ink)}
+.map-label{position:absolute;left:16px;bottom:16px;background:#fff;border:1px solid var(--line);padding:10px 12px;font:500 12px/1.3 var(--mono);letter-spacing:.06em}
+.hours{width:100%;border-collapse:collapse}
+.hours th,.hours td{text-align:left;padding:14px 0;border-bottom:1px solid var(--line);font:400 15px/1.4 var(--mono)}
+.hours th{font:500 11px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);width:45%}
+
+/* Pie: colofón */
+.foot{background:var(--night);color:#F2F1EE;padding:88px 0 40px}
+.foot a{color:#F2F1EE}
+.foot-grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px}
+.foot-brand{display:flex;align-items:center;gap:16px}
+.foot-brand img{width:88px;height:88px;border-radius:50%;box-shadow:0 0 0 1px #3A3A38}
+.foot ul{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
+.foot li a{display:inline-block;padding:7px 0;text-decoration:none;font-size:15px}
+.foot li a:hover{text-decoration:underline}
+.foot-base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--night-line);margin-top:72px;padding-top:24px;font:400 12px/1.4 var(--mono);letter-spacing:.06em;color:var(--fog)}
+
+/* Barra de WhatsApp fija en celular */
+.m-bar{display:none}
+
+/* Estado vacío */
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;padding:96px 0 120px}
+.empty img{width:min(360px,80%)}
+
+/* ===== Panel del dueño ===== */
+.pn{font-family:var(--sans);background:var(--wall);color:var(--ink);min-height:100vh;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.pn a{color:inherit}
+.pn :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.pn-top{background:var(--night);color:#F2F1EE}
+.pn-top .in{max-width:1320px;margin:0 auto;padding:0 32px;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.pn-top :focus-visible{outline-color:#fff}
+.pn-brand{display:flex;align-items:center;gap:12px;font:600 19px/1 var(--serif);letter-spacing:.03em;text-decoration:none}
+.pn-brand img{width:40px;height:40px;border-radius:50%}
+.pn-brand small{font:500 10px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--fog);margin-left:4px}
+.pn-shell{max-width:1320px;margin:0 auto;padding:32px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.pn-side{flex:0 0 220px;display:flex;flex-direction:column;gap:2px}
+.pn-side a{display:flex;align-items:center;min-height:48px;padding:0 14px;text-decoration:none;font-weight:500;border-left:2px solid transparent}
+.pn-side a[aria-current="page"]{background:#fff;border-left-color:var(--ink)}
+.pn-side a:hover{background:#fff}
+.pn-main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:24px}
+.pn-h{font:600 34px/1.05 var(--serif);margin:0}
+.card{background:#fff;border:1px solid var(--line)}
+.card-pad{padding:24px}
+.card-h{font:600 13px/1.2 var(--sans);letter-spacing:.1em;text-transform:uppercase;margin:0 0 16px}
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:1px solid var(--line)}
+.tab{min-height:48px;padding:0 16px;border:0;border-bottom:2px solid transparent;background:transparent;font:500 15px/1 var(--sans);color:var(--muted);cursor:pointer;white-space:nowrap}
+.tab[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.car-row{display:grid;grid-template-columns:120px minmax(0,1fr) 170px auto;gap:20px;align-items:center;padding:14px;border-bottom:1px solid var(--line)}
+.car-row:last-child{border-bottom:0}
+.car-row img,.car-row .noimg{width:120px;aspect-ratio:4/3;object-fit:cover;background:var(--wall)}
+.car-name{font:600 18px/1.2 var(--sans);margin:0}
+.car-meta{font:400 13px/1.4 var(--mono);color:var(--muted)}
+.car-price{font:500 15px/1.2 var(--mono)}
+.state{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:0 10px;font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--ink)}
+.state.disponible{background:#fff;color:var(--ink)}
+.state.reservado{background:var(--ink);color:#fff}
+.state.vendido{background:var(--wall);color:var(--muted);border-color:var(--edge);text-decoration:line-through}
+.sel{min-height:44px;border:1px solid var(--edge);background:#fff;padding:0 10px;font:500 14px var(--sans);color:var(--ink);border-radius:0;width:100%}
+.iconbtn{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--edge);background:#fff;color:var(--ink);cursor:pointer;border-radius:0;text-decoration:none;font:500 16px/1 var(--sans)}
+.iconbtn:hover{border-color:var(--ink)}
+.iconbtn[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pn-bottom{display:none}
+.ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(170px,100%),1fr));gap:12px}
+.ph-item{background:var(--wall);border:1px solid var(--line);display:flex;flex-direction:column}
+.ph-item .pic{position:relative;aspect-ratio:4/3;overflow:hidden}
+.ph-item .pic img{width:100%;height:100%;object-fit:cover}
+.ph-item .cover{position:absolute;left:8px;top:8px;background:var(--ink);color:#fff;font:500 10px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;padding:7px 8px}
+.ph-item .ctrls{display:flex;gap:4px;padding:6px;background:#fff;border-top:1px solid var(--line)}
+.ph-item .ctrls .iconbtn{flex:1;width:auto;border-color:var(--line)}
+.ph-add{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.ph-add label{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;border:1px solid var(--ink);font:600 14px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;cursor:pointer;background:#fff;position:relative}
+.ph-add label.primary{background:var(--ink);color:#fff}
+.ph-add input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.ph-add label:focus-within{outline:2px solid var(--ink);outline-offset:2px}
+.sw-row{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:56px}
+.sw{appearance:none;-webkit-appearance:none;width:52px;height:32px;border:1px solid var(--edge);background:var(--wall);position:relative;cursor:pointer;margin:0;flex:none;border-radius:0}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;background:#fff;border:1px solid var(--edge);transition:left .15s}
+.sw:checked{background:var(--ink);border-color:var(--ink)}
+.sw:checked::after{left:23px;border-color:var(--ink)}
+.eq-chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 4px 0 12px;background:var(--wall);border:1px solid var(--line);font-size:14px}
+.eq-chip button{width:32px;height:32px;border:0;background:transparent;cursor:pointer;font-size:16px;color:var(--ink)}
+.savebar{position:sticky;bottom:0;background:rgba(242,241,238,.96);border-top:1px solid var(--line);padding:12px 0;display:flex;gap:12px;justify-content:flex-end;flex-wrap:wrap}
+.login{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.login-art{background:var(--night);color:#F2F1EE;display:flex;flex-direction:column;justify-content:space-between;padding:48px}
+.login-form{display:flex;align-items:center;justify-content:center;padding:48px 24px;background:#fff}
+
+/* ===== Celular ===== */
+@media (max-width:900px){
+  .head .wrap{min-height:0;padding-top:14px;flex-wrap:wrap;gap:8px 16px}
+  .nav{order:3;flex:1 0 100%;overflow-x:auto;gap:24px;border-top:1px solid var(--line);margin:6px -20px 0;padding:0 20px}
+  .nav a{white-space:nowrap;padding:15px 0}
+  .head .btn{min-height:44px;padding:0 16px}
+  .brand img{width:52px;height:52px}
+  .strip .addr{display:none}
+  .strip .wrap{justify-content:center}
+  .hero{grid-template-columns:1fr;gap:40px;padding:40px 0 72px}
+  .ficha{grid-template-columns:1fr;gap:40px}
+  .filters{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+  .foot-grid > :first-child{grid-column:1/-1}
+  .login{grid-template-columns:1fr}
+  .login-art{display:none}
+}
+@media (max-width:720px){
+  .wrap{padding:0 20px}
+  .sec{padding:72px 0}
+  .sec-sm{padding:48px 0}
+  .sec-head{margin-bottom:32px}
+  .lots{gap:56px}
+  .lots.rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin:0 -20px;padding:0 20px 8px}
+  .lots.rail .lot{flex:0 0 84%;scroll-snap-align:start}
+  .lot-title{font-size:28px}
+  .split{gap:40px}
+  .ruled li{grid-template-columns:1fr}
+  .spec{grid-template-columns:1fr}
+  .thumbs{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:76px;overflow-x:auto}
+  .gal-nav{display:none}
+  .gal-bleed{margin:0 -20px}
+  .price-xl{font-size:34px}
+  .form-grid{grid-template-columns:1fr}
+  .filters{display:none;grid-template-columns:1fr;padding-top:8px}
+  .filters.is-open{display:grid}
+  .m-bar{display:flex;position:sticky;bottom:0;z-index:5;gap:8px;align-items:center;padding:10px 16px 14px;background:rgba(255,255,255,.97);border-top:1px solid var(--line)}
+  .m-bar .btn{flex:1}
+  .d-only{display:none !important}
+  .map{min-height:300px}
+  .pn-top .in{padding:0 16px}
+  .pn-shell{padding:16px 16px 24px;gap:16px}
+  .pn-side{display:none}
+  .pn-h{font-size:30px}
+  .card-pad{padding:18px}
+  .car-row{grid-template-columns:96px minmax(0,1fr);gap:12px 14px;padding:14px}
+  .car-row img,.car-row .noimg{width:96px}
+  .car-row .actions{grid-column:1/-1}
+  .car-row .stcol{grid-column:1/-1}
+  .pn-bottom{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));position:sticky;bottom:0;z-index:5;background:#fff;border-top:1px solid var(--line)}
+  .pn-bottom a{display:flex;align-items:center;justify-content:center;min-height:60px;font:500 13px/1 var(--sans);text-decoration:none;border-top:2px solid transparent}
+  .pn-bottom a[aria-current="page"]{border-top-color:var(--ink);font-weight:600}
+  .savebar{margin:0 -16px;padding:12px 16px}
+  .savebar .btn{flex:1}
+}
+@media (min-width:721px){ .m-only{display:none !important} }
+</style>
+</head>
+<body>
+<x-dc>
+<helmet>
+<style>/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDD-hdM8A_6pUKz9ugk.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDD-jNM8A_6pUKz9ugk.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDD-h9M8A_6pUKz9ugk.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDD-htM8A_6pUKz9ugk.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/c2fde14d-bcb4-406e-912e-379f55021bf9.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKky2F7i6C.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKky2F7i6C.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKky2F7i6C.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKky2F7i6C.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/ad61ef91-c5f0-4287-bfd9-d01a30253f08.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpHtKky2F7i6C.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYrXtKky2F7i6C.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYpntKky2F7i6C.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKky2F7i6C.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/ad61ef91-c5f0-4287-bfd9-d01a30253f08.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1iIq131nj-otFQ.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1isq131nj-otFQ.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1iAq131nj-otFQ.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1iEq131nj-otFQ.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwl1FgsAXHNlYzg.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwlRFgsAXHNlYzg.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwl9FgsAXHNlYzg.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwl5FgsAXHNlYzg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v20/-F6qfjptAgt5VM-kVkqdyU8n3twJwlBFgsAXHNk.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxTKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxaKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxdKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxRKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYbSB4Zh.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxTKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxaKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxdKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxRKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYbSB4Zh.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxTKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxaKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxdKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxRKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxQKYbSB4ZhRNU.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexsans/v23/zYXzKVElMYYaJe8bpLHnCwDKr932-G7dytD-Dmu1syxeKYbSB4Zh.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>body{margin:0}</style>
+</helmet>
+<div class="rc">
+
+<div class="strip"><div class="wrap"><span>| Compra | Venta | Permuta | Consignación |</span><span class="addr">Ciudad de la Costa · Uruguay · 097 945 961</span></div></div>
+<header class="head"><div class="wrap">
+<a class="brand" href="Main.dc.html" aria-label="R.Costa Automóviles, inicio"><img src="assets/307fea4e-9535-4224-bcf0-085c138c7b15.png" alt="" width="64" height="64"><span class="brand-name">R.COSTA<small>Automóviles</small></span></a>
+<nav class="nav" aria-label="Principal"><a href="Catalogo.dc.html" aria-current="page">Catálogo</a><a href="Vender.dc.html">Vendé o permutá</a><a href="Vender.dc.html">Consignación</a><a href="Contacto.dc.html">Dónde estamos</a></nav>
+<a class="btn" href="{{wa}}"><span class="wa-dot" aria-hidden="true"></span>WhatsApp</a>
+</div></header>
+
+<main class="wrap" style="padding-bottom: 120px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 16px 40px; flex-wrap: wrap; padding: 64px 0 28px; border-bottom: 1px solid #111111">
+<div class="stack g12"><p class="eyebrow">Catálogo completo</p><h1 class="h1">La sala, <span class="it">auto por auto.</span></h1></div>
+<p class="lead" style="max-width: 40ch">Precios en U$S. Si ves uno que te gusta, escribinos: te contestamos por WhatsApp.</p>
+</div>
+
+<div class="toolbar">
+<div class="row" style="gap: 16px">
+<button class="chip m-only" type="button" aria-expanded="{{open}}" aria-controls="filtros" sc-camel-on-click="{{toggle}}">{{filtrosLabel}}</button>
+<p class="mono" style="font-size: 14px" aria-live="polite">{{countLabel}}</p>
+<sc-if value="{{hasFilters}}" hint-placeholder-val="{{false}}"><button class="link" type="button" style="background: none; border: 0; padding: 12px 0; cursor: pointer" sc-camel-on-click="{{clear}}">Limpiar filtros</button></sc-if>
+</div>
+<div class="field" style="flex-direction: row; align-items: center; gap: 12px">
+<label for="orden">Ordenar</label>
+<sc-raw-select id="orden" class="input" style="width: auto; min-height: 44px" value="{{st.orden}}" sc-camel-on-change="{{setOrden}}">
+<option value="recientes">Recién llegados</option>
+<option value="precio-asc">Menor precio</option>
+<option value="precio-desc">Mayor precio</option>
+<option value="km">Menos kilómetros</option>
+<option value="anio">Más nuevos</option>
+</sc-raw-select>
+</div>
+</div>
+
+<div id="filtros" class="filters {{openCls}}" style="grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); margin-top: -24px; margin-bottom: 48px">
+<fieldset class="fgroup"><legend>Tipo</legend><div class="seg">
+<sc-for list="{{tipos}}" as="o" hint-placeholder-count="5"><button class="chip" type="button" aria-pressed="{{o.on}}" sc-camel-on-click="{{o.pick}}">{{o.label}}</button></sc-for>
+</div></fieldset>
+<fieldset class="fgroup"><legend>Combustible</legend><div class="seg">
+<sc-for list="{{combs}}" as="o" hint-placeholder-count="5"><button class="chip" type="button" aria-pressed="{{o.on}}" sc-camel-on-click="{{o.pick}}">{{o.label}}</button></sc-for>
+</div></fieldset>
+<fieldset class="fgroup"><legend>Caja</legend><div class="seg">
+<sc-for list="{{cajas}}" as="o" hint-placeholder-count="3"><button class="chip" type="button" aria-pressed="{{o.on}}" sc-camel-on-click="{{o.pick}}">{{o.label}}</button></sc-for>
+</div></fieldset>
+<div class="field"><label for="tope">Precio hasta</label>
+<sc-raw-select id="tope" class="input" value="{{st.max}}" sc-camel-on-change="{{setMax}}">
+<option value="0">Sin tope</option>
+<option value="25000">U$S 25.000</option>
+<option value="40000">U$S 40.000</option>
+<option value="60000">U$S 60.000</option>
+<option value="80000">U$S 80.000</option>
+</sc-raw-select></div>
+</div>
+
+<sc-if value="{{hasCars}}" hint-placeholder-val="{{true}}">
+<div class="lots">
+<sc-for list="{{cars}}" as="c" hint-placeholder-count="9">
+<a class="{{c.cls}}" href="Ficha.dc.html">
+<div class="lot-photo"><img src="{{c.img}}" alt="{{c.alt}}"><sc-if value="{{c.res}}" hint-placeholder-val="{{false}}"><span class="tag">Reservado</span></sc-if></div>
+<div class="lot-plaque">
+<div class="lot-no"><span>N.º {{c.no}} · {{c.marca}}</span><span>{{c.tipo}}</span></div>
+<h2 class="lot-title">{{c.modelo}}</h2>
+<div class="lot-price">{{c.precio}}</div>
+<div class="lot-ver">{{c.version}}</div>
+<div class="lot-data">{{c.datos}}</div>
+</div>
+</a>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{noMatch}}" hint-placeholder-val="{{false}}">
+<div class="empty">
+<img src="assets/82cc20de-189a-4347-8f01-e7281b32ac54.svg" alt="">
+<h2 class="h2">Ningún auto coincide <span class="it">con esos filtros.</span></h2>
+<p class="lead">Probá sacando alguno, o contanos qué buscás y te avisamos cuando entre uno así.</p>
+<div class="row" style="justify-content: center"><button class="btn" type="button" sc-camel-on-click="{{clear}}">Limpiar filtros</button><a class="btn btn-line" href="{{waBusco}}">Avisame por WhatsApp</a></div>
+</div>
+</sc-if>
+
+<sc-if value="{{sinStock}}" hint-placeholder-val="{{false}}">
+<div class="empty">
+<img src="assets/82cc20de-189a-4347-8f01-e7281b32ac54.svg" alt="">
+<p class="eyebrow">Sala en recambio</p>
+<h2 class="h2">Estamos preparando <span class="it">los próximos autos.</span></h2>
+<p class="lead">Mientras tanto, mirá lo último en Instagram o contanos qué estás buscando.</p>
+<div class="row" style="justify-content: center"><a class="btn" href="https://instagram.com/rcostaautomoviles">Ver @rcostaautomoviles</a><a class="btn btn-line" href="{{waBusco}}">Contanos qué buscás</a></div>
+</div>
+</sc-if>
+</main>
+
+<footer class="foot">
+<div class="wrap">
+<div class="foot-grid">
+<div class="foot-brand"><img src="assets/307fea4e-9535-4224-bcf0-085c138c7b15.png" alt="R.Costa Automóviles"><p class="eyebrow">| Compra | Venta |<br>| Permuta | Consignación |</p></div>
+<div><p class="eyebrow">Sala</p><ul><li><a href="Catalogo.dc.html">Catálogo</a></li><li><a href="Vender.dc.html">Vendé o permutá</a></li><li><a href="Vender.dc.html">Consignación</a></li></ul></div>
+<div><p class="eyebrow">Contacto</p><ul><li><a href="{{wa}}">WhatsApp 097 945 961</a></li><li><a href="tel:+59897945961">Llamar</a></li><li><a href="Contacto.dc.html">Dónde estamos</a></li></ul></div>
+<div><p class="eyebrow">Redes</p><ul><li><a href="https://instagram.com/rcostaautomoviles">Instagram @rcostaautomoviles</a></li><li><a href="#">[FACEBOOK]</a></li></ul></div>
+</div>
+<div class="foot-base"><span>R.Costa Automóviles · Ciudad de la Costa · Uruguay</span><span>Precios en dólares estadounidenses (U$S) salvo indicación</span></div>
+</div>
+</footer>
+
+<div class="m-bar"><a class="btn" href="{{wa}}"><span class="wa-dot" aria-hidden="true"></span>WhatsApp</a></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;estado&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Con autos&quot;,&quot;Sin stock&quot;],&quot;default&quot;:&quot;Con autos&quot;},&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:2900}}">
+class Component extends DCLogic {
+  constructor(p) {
+    super(p);
+    this.state = { tipo: 'Todos', comb: 'Todos', caja: 'Todas', max: '0', orden: 'recientes', open: false };
+  }
+  renderVals() {
+    const st = this.state;
+    const fmt = (n) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    const all = [
+      { no: '01', marca: 'Ford', modelo: 'Ranger Raptor', version: '[3.0 V6 biturbo]', tipo: 'Pick-up', comb: 'Nafta', caja: 'Automática', anio: 2024, km: 12000, usd: 79900, img: '/_blob/36d58d8c94bdd27f675dd22ceb26149a' },
+      { no: '02', marca: 'Toyota', modelo: 'Corolla Cross', version: '[XEI Hybrid]', tipo: 'SUV', comb: 'Híbrido', caja: 'Automática', anio: 2023, km: 28000, usd: 36900, img: '/_blob/4dd0a1c489b9a6d3c61e0bc53b34a1aa' },
+      { no: '03', marca: 'Mercedes-Benz', modelo: 'GLC', version: '[GLC 300 4MATIC]', tipo: 'SUV', comb: 'Nafta', caja: 'Automática', anio: 2021, km: 41000, usd: 62500, img: '/_blob/e79fe49452d55073d2fb535737347417', res: true },
+      { no: '04', marca: 'Suzuki', modelo: 'Swift', version: '[GLX 1.2]', tipo: 'Hatchback', comb: 'Nafta', caja: 'Manual', anio: 2022, km: 33000, usd: 17900, img: '/_blob/bcd7ce329e840f17ef407ef2ac43b16f' },
+      { no: '05', marca: 'Mercedes-Benz', modelo: 'GLE Coupé', version: '[AMG 43 4MATIC]', tipo: 'Coupé', comb: 'Nafta', caja: 'Automática', anio: 2019, km: 58000, usd: 74000, img: '/_blob/18573be52656e36f3b5b75fb348c70a9' },
+      { no: '06', marca: 'BMW', modelo: 'Serie 4 Gran Coupé', version: '[420i M Sport]', tipo: 'Coupé', comb: 'Nafta', caja: 'Automática', anio: 2022, km: 22000, usd: 58900, img: '/_blob/3f6842560428dc63a2b54a9ff909b8d3' },
+      { no: '07', marca: 'Volkswagen', modelo: 'Nivus', version: '[Highline 1.0 TSI]', tipo: 'SUV', comb: 'Nafta', caja: 'Automática', anio: 2022, km: 35000, usd: 24900, img: '/_blob/3b6cb2512f0870a7da5ffcbe546d90eb' },
+      { no: '08', marca: 'Chevrolet', modelo: 'Silverado', version: '[Z71 5.3 V8]', tipo: 'Pick-up', comb: 'Nafta', caja: 'Automática', anio: 2023, km: 30000, usd: 72000, img: '/_blob/5d497d80fceaa37fbf8c4b3c320eec26', res: true },
+      { no: '09', marca: 'RAM', modelo: 'Rampage', version: '[R/T 2.0 turbo]', tipo: 'Pick-up', comb: 'Nafta', caja: 'Automática', anio: 2024, km: 9000, usd: 56900, img: '/_blob/d480a4d6340d802136a4b5514736ca35' }
+    ];
+    const max = Number(st.max);
+    let list = all.filter((c) =>
+      (st.tipo === 'Todos' || c.tipo === st.tipo) &&
+      (st.comb === 'Todos' || c.comb === st.comb) &&
+      (st.caja === 'Todas' || c.caja === st.caja) &&
+      (!max || c.usd <= max));
+    const sorters = {
+      'precio-asc': (a, b) => a.usd - b.usd,
+      'precio-desc': (a, b) => b.usd - a.usd,
+      km: (a, b) => a.km - b.km,
+      anio: (a, b) => b.anio - a.anio
+    };
+    if (sorters[st.orden]) list = list.slice().sort(sorters[st.orden]);
+    const sinStock = (this.props.estado ?? 'Con autos') === 'Sin stock';
+    if (sinStock) list = [];
+    const cars = list.map((c) => ({
+      ...c,
+      cls: c.res ? 'lot res' : 'lot',
+      res: !!c.res,
+      alt: c.marca + ' ' + c.modelo + (c.res ? ', reservado' : ''),
+      precio: 'U$S [' + fmt(c.usd) + ']',
+      datos: '[' + c.anio + ' · ' + fmt(c.km) + ' km] · ' + c.comb + ' · ' + c.caja
+    }));
+    const opts = (key, labels) => labels.map((l) => ({ label: l, on: st[key] === l, pick: () => this.setState({ [key]: l }) }));
+    const nActive = (st.tipo !== 'Todos') + (st.comb !== 'Todos') + (st.caja !== 'Todas') + (max ? 1 : 0);
+    const base = 'https://wa.me/59897945961?text=';
+    return {
+      st,
+      cars,
+      hasCars: cars.length > 0,
+      noMatch: !sinStock && cars.length === 0,
+      sinStock,
+      hasFilters: nActive > 0 && !sinStock,
+      countLabel: sinStock ? 'Sin autos por ahora' : (cars.length === 1 ? '1 auto' : cars.length + ' autos') + (nActive ? ' con estos filtros' : ' en exhibición'),
+      filtrosLabel: nActive ? 'Filtros (' + nActive + ')' : 'Filtros',
+      open: st.open,
+      openCls: st.open ? 'is-open' : '',
+      toggle: () => this.setState({ open: !st.open }),
+      tipos: opts('tipo', ['Todos', 'SUV', 'Pick-up', 'Coupé', 'Hatchback']),
+      combs: opts('comb', ['Todos', 'Nafta', 'Híbrido', 'Diésel', 'Eléctrico']),
+      cajas: opts('caja', ['Todas', 'Automática', 'Manual']),
+      setMax: (e) => this.setState({ max: e.target.value }),
+      setOrden: (e) => this.setState({ orden: e.target.value }),
+      clear: () => this.setState({ tipo: 'Todos', comb: 'Todos', caja: 'Todas', max: '0' }),
+      wa: base + encodeURIComponent('Hola R.Costa, les escribo desde la web.'),
+      waBusco: base + encodeURIComponent('Hola R.Costa, estoy buscando un auto así: [marca, modelo, año, presupuesto]. ¿Me avisan si entra uno?')
+    };
+  }
+}
+</script>
+
+
+</body></html>
