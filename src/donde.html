@@ -1,0 +1,48 @@
+{{> head}}
+<body class="rc" data-raiz="{{raiz}}">
+{{> header}}
+
+<main id="contenido" class="wrap" style="padding-top: 72px; padding-bottom: 120px">
+<div class="stack g16" style="padding-bottom: 28px; border-bottom: 1px solid #111111; margin-bottom: 48px">
+<p class="eyebrow">Dónde estamos</p>
+<h1 class="h1">{{negocio.localidad}}, <span class="it">{{negocio.departamento}}.</span></h1>
+</div>
+
+<div class="split" style="grid-template-columns: repeat(auto-fit, minmax(min(520px, 100%), 1fr)); gap: 64px">
+<div class="stack g16">
+{{mapa}}
+<div class="row" style="justify-content: space-between"><p class="mono" style="font-size: 14px">{{negocio.direccionCompleta}}</p><a class="link" href="{{negocio.mapsHref}}" target="_blank" rel="noopener">Abrir en Google Maps</a></div>
+</div>
+
+<div class="stack g48">
+<div class="stack g16">
+<h2 class="h3">Horarios</h2>
+<table class="hours">
+<tbody>
+{{filasHorario}}
+</tbody>
+</table>
+<p class="hint">Si venís a ver un auto en particular, avisanos antes y te lo tenemos listo.</p>
+</div>
+
+<div class="stack g16">
+<h2 class="h3">Teléfonos</h2>
+<table class="hours">
+<tbody>
+{{filasTelefonos}}
+</tbody>
+</table>
+</div>
+
+{{redes}}
+{{otrosLocales}}
+<div class="row"><a class="btn" href="{{waVisita}}"><span class="wa-dot" aria-hidden="true"></span>Coordinar una visita</a><a class="btn btn-line" href="{{negocio.mapsHref}}" target="_blank" rel="noopener">Cómo llegar</a></div>
+</div>
+</div>
+</main>
+
+{{> footer}}
+
+<div class="m-bar"><a class="btn" href="{{waVisita}}"><span class="wa-dot" aria-hidden="true"></span>WhatsApp</a><a class="btn btn-line" href="{{negocio.mapsHref}}" target="_blank" rel="noopener">Cómo llegar</a></div>
+</body>
+</html>
