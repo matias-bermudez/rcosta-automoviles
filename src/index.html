@@ -1,0 +1,69 @@
+{{> head}}
+<body class="rc" data-raiz="{{raiz}}">
+{{> header}}
+
+<main id="contenido">
+<section class="wrap hero" aria-labelledby="hero-t">
+<div class="stack g32">
+<p class="eyebrow">{{negocio.localidad}} — Uruguay</p>
+<h1 id="hero-t" class="display">Autos elegidos <span class="it">uno por uno.</span></h1>
+<p class="lead">Compramos, vendemos, permutamos y consignamos autos seleccionados. Todos fotografiados en el mismo lugar, para que los compares tal cual son.</p>
+<div class="row" style="gap: 12px; margin-top: 8px">
+<a class="btn" href="{{raiz}}autos/">Ver el catálogo</a>
+<a class="btn btn-line" href="{{wa.href}}">Escribinos al {{wa.label}}</a>
+</div>
+</div>
+{{hero}}
+</section>
+
+<section class="sec" style="padding-top: 0" aria-labelledby="dest-t">
+<div class="wrap">
+<div class="sec-head">
+<div class="stack g12"><p class="eyebrow">Sala 1 · Destacados</p><h2 id="dest-t" class="h2">En exhibición ahora</h2></div>
+{{verCatalogo}}
+</div>
+{{destacados}}
+</div>
+</section>
+
+<section class="dark sec" aria-labelledby="cons-t">
+<div class="wrap split">
+<div class="stack g24">
+<p class="eyebrow">Consignación</p>
+<h2 id="cons-t" class="h2">Dejalo con nosotros. <span class="it">Lo vendemos por vos.</span></h2>
+<p class="lead">Tu auto entra a la sala como cualquiera de los nuestros: mismas fotos, misma ficha, mismo lugar en Instagram. Vos no atendés llamadas ni mostrás el auto a desconocidos.</p>
+<div class="row" style="margin-top: 8px"><a class="btn btn-light" href="{{raiz}}vende-tu-auto/?modo=consignar#form">Quiero consignar mi auto</a></div>
+</div>
+<ul class="ruled">
+<li><span class="k">Fotos y ficha</span><span class="v">En nuestro lugar de siempre, con la misma prolijidad que el resto del stock.</span></li>
+<li><span class="k">Difusión</span><span class="v">{{difusion}}</span></li>
+<li><span class="k">Consultas y pruebas</span><span class="v">Las atendemos nosotros. Te avisamos cuando hay una oferta en serio.</span></li>
+<li><span class="k">Condiciones</span><span class="v">{{condiciones}}</span></li>
+</ul>
+</div>
+</section>
+{{financiacion}}
+<section class="sec" aria-labelledby="donde-t">
+<div class="wrap">
+<div class="sep" style="margin-bottom: 72px"><img src="{{raiz}}img/linea.svg" alt=""></div>
+<div class="split">
+{{mapa}}
+<div class="stack g32">
+<div class="stack g12"><p class="eyebrow">Dónde estamos</p><h2 id="donde-t" class="h2">{{negocio.localidad}}, {{negocio.departamento}}.</h2></div>
+<table class="hours">
+<tbody>
+{{filasInicio}}
+</tbody>
+</table>
+<div class="row"><a class="btn" href="{{waVisita}}">Coordinar una visita</a><a class="link" href="{{raiz}}donde-estamos/">Ver cómo llegar</a></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+{{> footer}}
+
+<div class="m-bar"><a class="btn" href="{{wa.href}}"><span class="wa-dot" aria-hidden="true"></span>WhatsApp</a><a class="btn btn-line" href="{{raiz}}autos/">Catálogo</a></div>
+</body>
+</html>
