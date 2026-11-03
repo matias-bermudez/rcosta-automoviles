@@ -1,0 +1,91 @@
+{{> head}}
+<body class="rc" data-raiz="{{raiz}}">
+{{> header}}
+
+<main id="contenido">
+<section class="wrap" style="padding-top: 72px; padding-bottom: 48px">
+<div class="stack g24" style="max-width: 920px">
+<p class="eyebrow">Compra · Permuta · Consignación</p>
+<h1 class="h1">Tu auto, <span class="it">a la sala.</span></h1>
+<p class="lead">Te lo compramos, lo tomamos como parte de pago o lo vendemos por vos. Completá estos datos y nos llegan ordenados por WhatsApp. Te contestamos con una propuesta.</p>
+</div>
+</section>
+
+<section id="form" class="wrap" style="padding-bottom: 120px; scroll-margin-top: 16px" aria-label="Formulario">
+<div class="split" style="grid-template-columns: repeat(auto-fit, minmax(min(520px, 100%), 1fr)); gap: 72px">
+<form class="stack g32" style="border-top: 1px solid #111111; padding-top: 32px" id="f-vende" novalidate>
+<fieldset class="fgroup"><legend>¿Qué querés hacer?</legend>
+<div class="seg" id="modo">
+<button class="chip" type="button" data-v="vender" aria-pressed="true" style="min-height: 52px; padding: 0 22px; font-size: 15px">Vender</button>
+<button class="chip" type="button" data-v="permutar" aria-pressed="false" style="min-height: 52px; padding: 0 22px; font-size: 15px">Permutar</button>
+<button class="chip" type="button" data-v="consignar" aria-pressed="false" style="min-height: 52px; padding: 0 22px; font-size: 15px">Consignar</button>
+</div>
+</fieldset>
+
+<p class="msg" id="interes" style="white-space: normal" hidden></p>
+
+<div class="form-grid">
+<div class="field"><label for="f-marca">Marca</label><input id="f-marca" name="marca" class="input" type="text" autocomplete="off" placeholder="Ej.: Peugeot"></div>
+<div class="field"><label for="f-modelo">Modelo y versión</label><input id="f-modelo" name="modelo" class="input" type="text" autocomplete="off" placeholder="Ej.: 208 Allure"></div>
+<div class="field"><label for="f-anio">Año</label><input id="f-anio" name="anio" class="input" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 2020"></div>
+<div class="field"><label for="f-km">Kilómetros</label><input id="f-km" name="km" class="input" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 48.000"></div>
+<fieldset class="fgroup span2"><legend>¿Tiene deuda (prenda, patente, multas)?</legend>
+<div class="seg" id="deuda">
+<button class="chip" type="button" data-v="No" aria-pressed="true">No</button>
+<button class="chip" type="button" data-v="Sí" aria-pressed="false">Sí</button>
+<button class="chip" type="button" data-v="No sé" aria-pressed="false">No sé</button>
+</div>
+</fieldset>
+<div class="field span2"><label for="f-busca" id="busca-label">Algo más que quieras contarnos (opcional)</label><input id="f-busca" name="busca" class="input" type="text" autocomplete="off" placeholder="Ej.: service al día, un solo dueño"></div>
+<div class="field"><label for="f-nombre">Tu nombre</label><input id="f-nombre" name="nombre" class="input" type="text" autocomplete="given-name"></div>
+<div class="field"><label for="f-cel">Celular</label><input id="f-cel" name="cel" class="input" type="tel" autocomplete="tel" placeholder="09X XXX XXX"></div>
+</div>
+<p class="hint">Las fotos de tu auto mandalas directamente en el chat, después del mensaje.</p>
+</form>
+
+<div class="stack g16" style="position: sticky; top: 24px">
+<div class="row" style="justify-content: space-between"><p class="eyebrow">Vista previa del mensaje</p><p class="mono" style="font-size: 12px">Para {{wa.label}}</p></div>
+<div class="wall" style="padding: 28px">
+<p class="msg-wa" id="preview"></p>
+</div>
+<a class="btn btn-block" href="{{wa.href}}" id="enviar" style="min-height: 60px; font-size: 14px"><span class="wa-dot" aria-hidden="true"></span>Enviar por WhatsApp</a>
+<p class="faltan" id="falta" hidden></p>
+<p class="hint">Se abre WhatsApp con el mensaje listo. Podés editarlo antes de mandarlo.</p>
+</div>
+</div>
+</section>
+
+<section class="dark sec" id="consignacion" aria-labelledby="cons-t" style="scroll-margin-top: 0">
+<div class="wrap">
+<div class="sep" style="margin-bottom: 72px"><img src="{{raiz}}img/linea-clara.svg" alt=""></div>
+<div class="split" style="gap: 72px">
+<div class="stack g24">
+<p class="eyebrow">Consignación</p>
+<h2 id="cons-t" class="h2">Vos seguís siendo el dueño. <span class="it">Nosotros lo vendemos.</span></h2>
+<p class="lead">Tu auto pasa a estar en exhibición con nosotros: lo fotografiamos en el mismo lugar que el resto del stock, lo publicamos y atendemos a cada interesado. Cuando aparece una oferta en serio, te llamamos y decidís vos.</p>
+<p class="body" style="color: #B9B6AF">Es para el que quiere vender bien, pero no tiene tiempo para mostrar el auto, contestar mensajes ni negociar con desconocidos.</p>
+<div class="row" style="margin-top: 8px"><a class="btn btn-light" href="?modo=consignar#form" id="a-consignar">Quiero consignar mi auto</a></div>
+</div>
+<div class="stack g48">
+<div class="stack g16"><p class="eyebrow">Qué incluye</p>
+<ul class="ruled">
+<li><span class="k">Fotos y ficha</span><span class="v">Fotos de frente en tres cuartos, laterales e interior, y una ficha con todos los datos.</span></li>
+<li><span class="k">Publicación</span><span class="v">{{publicacion}}</span></li>
+<li><span class="k">Atención</span><span class="v">Contestamos consultas, coordinamos visitas y pruebas de manejo.</span></li>
+{{filaPapeles}}
+</ul></div>
+<div class="stack g16"><p class="eyebrow">Condiciones</p>
+<ul class="ruled">
+{{condiciones}}
+</ul></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+{{> footer}}
+
+<div class="m-bar"><a class="btn" href="{{wa.href}}" id="enviar-m"><span class="wa-dot" aria-hidden="true"></span>Enviar por WhatsApp</a></div>
+</body>
+</html>
